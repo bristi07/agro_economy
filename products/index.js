@@ -16,7 +16,7 @@ app.use('/products', products);
 
 app.get('/', (req, res) => {
     res.status(200).json({
-        team_name: "Curious Monkeys",
+        team_name: "Chutiya",
         dev_team: ["Baraa A.", "Eman S.", "Sary N.", "Youssef S."].sort()
     })
 });

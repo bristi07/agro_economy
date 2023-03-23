@@ -12,17 +12,19 @@ app.use(bodyParser.json({extended: true}));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
-app.use('/me', me);
+app.use( me);
 
-app.get('/', (req, res) => {
-    res.status(200).json({
-        team_name: "Curious Monkeys",
-        dev_team: ["Baraa A.", "Eman S.", "Sary N.", "Youssef S."].sort()
-    })
-});
+// app.get('/', (req, res) => {
+//     res.status(200).json({
+//         team_name: "Curious Monkeys",
+//         dev_team: ["Baraa A.", "Eman S.", "Sary N.", "Youssef S."].sort()
+//     })
+// });
 
-const PORT = process.env.PORT || 5000;
+//const PORT = process.env.PORT || 5000;
+const PORT =  5000;
 
+mongoose.set('strictQuery', true);
 const mongooseOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true

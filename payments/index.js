@@ -18,7 +18,7 @@ app.use('/payments', payments);
 
 app.get('/', (req, res) => {
     res.status(200).json({
-        team_name: "Curious Monkeys",
+        team_name: " Monkey1",
         dev_team: ["Baraa A.", "Eman S.", "Sary N.", "Youssef S."].sort()
     })
 });

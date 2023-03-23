@@ -8,14 +8,14 @@ import shipping from "./routes/shipping.js"
 import orders from './routes/orders.js';
 import payments from './routes/payments.js';
 import notifications from "./routes/notifications.js";
-import sgMail from '@sendgrid/mail';
+//import sgMail from '@sendgrid/mail';
 import me from "./routes/me.js";
 import Stripe from "stripe";
 
 const app = express();
 dotenv.config();
 
-sgMail.setApiKey(process.env.SENDGRID_KEY);
+// sgMail.setApiKey(process.env.SENDGRID_KEY);
 export const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY);
 
 app.use(bodyParser.json({extended: true}));
@@ -31,12 +31,13 @@ app.use('/me', me);
 
 app.get('/', (req, res) => {
     res.status(200).json({
-        team_name: "Curious Monkeys",
+        team_name: " Monkeys",
         dev_team: ["Baraa A.", "Eman S.", "Sary N.", "Youssef S."].sort()
     })
 });
 
-const PORT = process.env.PORT || 5000;
+//const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 
 const mongooseOptions = {
     useNewUrlParser: true,

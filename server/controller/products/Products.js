@@ -4,24 +4,29 @@ import Pagination from '../../utils/pagination.js';
 import CSVtoJSON from "../../utils/CSVtoJSON.js";
 
 export const productsSearch = async (req, res) => {
+    
     try {
 
-        const products = await Products.find({"name": {$regex: req.query.search, $options: "i"}});
+            const products = await Products.find({"name":req.query.search });
+           // {$regex: req.query.search, $options: "i"}
+            console.log(products);
+        // const productsPaged = Pagination(req.query.page, products);
 
-        const productsPaged = Pagination(req.query.page, products);
-
-        const numberOfPages = Math.ceil(products.length / 2);
-        res.status(200).json({total_pages: numberOfPages, products:productsPaged});
+        // const numberOfPages = Math.ceil(products.length / 2);
+        // res.status(200).json({total_pages: numberOfPages, products:productsPaged});
+        res.status(200).json({ products:products});
 
     } catch (error) {
         res.status(404).json({message: error.message});
     }
 }
-
+//products kya h yaha pe?
 export const updateQuantity = async (req, res) => {
     try {
-        const { products } = req.body;
+        const {products} = req.body;
+        
         for(const product of products){
+            console.log("products",products);
             const searchedProduct = await Products.findOne({ product_id: product.product_id });
             if(searchedProduct.stock - product.quantity <= 0){
                 await Products.findOneAndUpdate({product_id: product.product_id},{ "stock": 0});
