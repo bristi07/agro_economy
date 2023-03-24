@@ -4,62 +4,65 @@ import axios from "axios";
 import {USER_BASEURL, PRODUCTS_BASEURL, NOTIFICATIONS_BASEURL, SHIPPING_BASEURL} from "../../services/BaseURLs.js";
 
 export const createOrder = async (req, res) => {
+   console.log(req.body);
+   // var data=[]
     try {
-        const {data} = req.body;
+      //const {data} = req.body;
+       console.log("data:",req.body.total);
         const order = new Order({
-            order_id: data.order_id,
-            name: {
-                first: data.firstName,
-                last: data.lastName,
-            },
-            email: data.email,
-            phone_number: data.phone_number,
-            address: JSON.parse(data.address),
-            ordered_at: Date.now(),
-            products: JSON.parse(data.products),
-            total: data.total,
+            order_id:  req.body.order_id,
+            name:JSON.parse( JSON.stringify(req.body.name)),
+            email:  req.body.email,
+            phone_number:  req.body.phone_number,
+           address: JSON.parse(JSON.stringify(req.body.address) ),
+           ordered_at: Date.now(),
+           products: JSON.parse( JSON.stringify(req.body.products)),
+            total:  req.body.total
         });
 
         await order.save();
 
-        await axios.patch(
-            `${PRODUCTS_BASEURL}/updateQuantity`,
-            {products: order.products}
-        );
+        // await axios.patch(
+        //     `${PRODUCTS_BASEURL}/updateQuantity`,
+        //     {products: order.products}
+        // );
 
-        const to = order.email;
+        //const to = order.email;
 
-        await axios.post(
-            `${NOTIFICATIONS_BASEURL}/order-confirmation`,
-            {to, order}
-        );
+        // await axios.post(
+        //     `${NOTIFICATIONS_BASEURL}/order-confirmation`,
+        //     {to, order}
+        // );
 
-        await axios.post(`${SHIPPING_BASEURL}`, {
-            ordered_at: order.ordered_at,
-            order_id: order.order_id,
-            address: order.address,
-            total: order.total,
-        });
+        // await axios.post(`${SHIPPING_BASEURL}`, {
+        //     ordered_at: order.ordered_at,
+        //     order_id: order.order_id,
+        //     address: order.address,
+        //     total: order.total,
+        // });
 
-        res.status(200).json({order_id: order.order_id});
+        res.status(200).json({order_id: order.order_id,total: order.total});
     } catch (error) {
         console.log(error);
         res.status(404).json({error: error.message});
     }
 };
 
-export const getOrder = async (req, res) => {
+export const  getOrder = async (req, res) => {
+    //console.log(req.body);
     try {
         const requiredOrder = await Order.findOne({order_id: req.params.id});
+        //console.log(req.params.id);
 
         if (!requiredOrder) {
             return res.status(404).json({message: "Order does not exist"});
         }
 
-        const productIds = requiredOrder.products.map(pr => pr.product_id);
-        const {data} = await axios.post(`${PRODUCTS_BASEURL}/arr`, {arr: productIds});
+        // const productIds = requiredOrder.products.map(pr => pr.product_id);
+        // const {data} = await axios.post(`${PRODUCTS_BASEURL}/arr`, {arr: productIds});
 
-        res.status(200).json({...requiredOrder._doc, products: data});
+        //res.status(200).json({...requiredOrder._doc, products: data});
+        res.status(200).json({order_id:requiredOrder.order_id,total:requiredOrder.total});
     } catch (error) {
         res.status(400).json({message: error.message});
     }

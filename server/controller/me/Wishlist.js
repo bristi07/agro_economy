@@ -10,10 +10,10 @@ export const getWishlist = async (req, res) => {
         const {wishlist} = await Users.findById(id);
 
         // request the products in the wishlist from the `Products` service
-        const {data} = await axios.post(`${PRODUCTS_BASEURL}/arr`, {arr: wishlist});
+        //const {data} = await axios.post(`${PRODUCTS_BASEURL}/arr`, {arr: wishlist});
 
         // respond with all products
-        res.status(200).json(data);
+        res.status(200).json(wishlist);
     } catch (e) {
         res.status(400).json({message: e.message});
     }

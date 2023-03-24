@@ -7,13 +7,13 @@ export const productsSearch = async (req, res) => {
     
     try {
 
-            const products = await Products.find({"name":req.query.search });
+            const products = await Products.find({"catogery":req.query.search }); //"name not working"
            // {$regex: req.query.search, $options: "i"}
-            console.log(products);
-        // const productsPaged = Pagination(req.query.page, products);
+            //console.log(products);
+        const productsPaged = Pagination(req.query.page, products);
 
-        // const numberOfPages = Math.ceil(products.length / 2);
-        // res.status(200).json({total_pages: numberOfPages, products:productsPaged});
+        const numberOfPages = Math.ceil(products.length / 2);
+        res.status(200).json({total_pages: numberOfPages, products:productsPaged});
         res.status(200).json({ products:products});
 
     } catch (error) {
@@ -22,19 +22,25 @@ export const productsSearch = async (req, res) => {
 }
 //products kya h yaha pe?
 export const updateQuantity = async (req, res) => {
+    let products=[];
     try {
-        const {products} = req.body;
+         products= req.body;
         
-        for(const product of products){
-            console.log("products",products);
+         for(const product of products){
+            //console.log("products-",product);
             const searchedProduct = await Products.findOne({ product_id: product.product_id });
+            // console.log("searchedProduct",searchedProduct);
+            // console.log("searchedProduct-stock",searchedProduct.stock);
+            // console.log("product-quantity",product.quantity);
             if(searchedProduct.stock - product.quantity <= 0){
                 await Products.findOneAndUpdate({product_id: product.product_id},{ "stock": 0});
             }
             else{
                 await Products.findOneAndUpdate({product_id: product.product_id},{"stock": searchedProduct.stock - product.quantity}); 
+               //console.log("searchedProduct-stock", searchedProduct.stock);
             }
         }
+         
         res.status(200).json({ message: "updated" });
     } catch (error) {
         res.status(500).json({ message: error.message });

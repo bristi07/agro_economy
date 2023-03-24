@@ -12,15 +12,15 @@ API.interceptors.request.use((req) => {
     return req;
 });
 
-export const getProductsPerPage = (page, category) => API.get(`${PRODUCTS_BASEURL}?page=${page}${category && `&category=${category}`}`);
+export const getProductsPerPage = (page, category) => API.get(`http://localhost:5000/products?page=${page}${category && `&category=${category}`}`);
 export const productsSearch = (search, page) => API.get(`${PRODUCTS_BASEURL}/search?search=${search}&page=${page}`);
 export const getRecommendations = () => API.get(`${PRODUCTS_BASEURL}/recommendations`);
-export const postProduct = (product) => API.post(`${PRODUCTS_BASEURL}`, product);
+export const postProduct = (product) => API.post(`http://localhost:5000/products`, product);
 export const adminUpdateDatabase = (csv, mode) => API.patch(`${PRODUCTS_BASEURL}`, {csv, mode});
 export const validateCart = (cart) => API.post(`${PRODUCTS_BASEURL}/cart`, {cart});
 
-export const authLogin = (email, password) => API.post(`${USER_BASEURL}/login`, {email, password});
-export const verify = () => API.post(`${USER_BASEURL}/verify`);
+export const authLogin = (email, password) => axios.post(`http://localhost:5000/me/login`, {email, password});
+export const verify = () => API.post(`http://localhost:5000/me/verify`);
 export const userUpdateWishlist = (product_id) => API.patch(`${USER_BASEURL}/wishlist`, {product_id});
 export const getWishlist = () => API.get(`${USER_BASEURL}/wishlist`);
 

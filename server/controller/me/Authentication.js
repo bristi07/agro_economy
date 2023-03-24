@@ -1,6 +1,6 @@
 import Users from "../../model/Users.js";
 import jwt from 'jsonwebtoken'
-import bcrypt from 'bcrypt'
+import bcrypt, { compare } from 'bcrypt'
 
 export const register = async (req, res) => {
     try {
@@ -62,7 +62,9 @@ export const login = async (req, res) => {
 
 
 export const verifyUser = async (req, res) => {
+   // console.log(req.body);
     const {id} = req.body;
+    console.log("id",id);
     try {
         const user = await Users.findById(id, {password: 0})
         return res.status(200).json({...user?._doc});
@@ -72,6 +74,7 @@ export const verifyUser = async (req, res) => {
 }
 
 export const verifyRole = async (req, res) => {
+    console.log(req.body);
     try {
         const {id, role} = req.body;
 

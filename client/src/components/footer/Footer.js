@@ -29,13 +29,13 @@ const Footer = () => {
                     <div className={styles['pages']}>
                         <div className={styles['page-title']}>Development</div>
                         <div className={styles['pages-list']}>
-                            <a href={'https://github.com/skittlesaur/rabbitmart'} target={'_blank'} rel={'noreferrer'}>GitHub Repository</a>
+                            <a href={'https://github.com/agrothon/Agrothon'} target={'_blank'} rel={'noreferrer'}>GitHub Repository</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div className={styles['credits']}>
-                Curious Monkeys, 2022.
+                ITUS, 2023.
             </div>
         </div>
     );
