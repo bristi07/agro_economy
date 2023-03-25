@@ -16,7 +16,7 @@ const OrderSummary = ({order}) => {
                         <div className={styles['product-img']}>
                             <img src={product.image} alt={product.name}/>
                         </div>
-                        <div className={styles['quantity']}>{product.price}EGP x{product.quantity || 1}</div>
+                        <div className={styles['quantity']}>{product.price}₹  x{product.quantity || 1}</div>
                         <div className={styles['product-name']}>{product.name}</div>
                     </div>
                 )}

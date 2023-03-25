@@ -128,7 +128,7 @@ const create = (order) => `
             <p>Order Tracking Id: <span class="val">#HELLO1</span></p>
             <p>Items Purchased: <span class="val">${order.products.length} Items</span></p>
             <p>Expected Arrival: <span class="val">${order.ordered_at}</span></p>
-            <p>Grand Total: <span class="val">${order.total} EGP</span></p>
+            <p>Grand Total: <span class="val">₹ ${order.total}  </span></p>
         </div>
         <div class="buttons">
             <a class="order" href="http://localhost:3000/orders/${order.order_id}">View Order</a>

@@ -4,23 +4,25 @@ import Pagination from '../../utils/pagination.js';
 import CSVtoJSON from "../../utils/CSVtoJSON.js";
 
 export const productsSearch = async (req, res) => {
-    
+   // console.log(req.body)
     try {
 
-            const products = await Products.find({"catogery":req.query.search }); //"name not working"
+        console.log(req.query.search);
+             const products = await Products.find({name: {$regex: req.query.search, $options: "i"}}); 
+           //  console.log(products);  
+
            // {$regex: req.query.search, $options: "i"}
-            //console.log(products);
         const productsPaged = Pagination(req.query.page, products);
 
         const numberOfPages = Math.ceil(products.length / 2);
         res.status(200).json({total_pages: numberOfPages, products:productsPaged});
-        res.status(200).json({ products:products});
+       // res.status(200).json({ products:products});
 
     } catch (error) {
         res.status(404).json({message: error.message});
     }
 }
-//products kya h yaha pe?
+
 export const updateQuantity = async (req, res) => {
     let products=[];
     try {

@@ -90,7 +90,7 @@ const Checkout = () => {
         return String(phone)
             .toLowerCase()
             .match(
-                /^01[0-2,5]{1}[0-9]{8}$/
+                /^91[0-9]{10}$/
             );
     };
 
@@ -127,7 +127,7 @@ const Checkout = () => {
 
             <div className={styles['total']}>
                 <div className={styles["total-text"]}>Total Price:</div>
-                <div className={styles['total-amount']}>{cart.total} EGP</div>
+                <div className={styles['total-amount']}>₹ {cart.total}</div>
             </div>
 
             <div className={styles['total-wrapper']}>

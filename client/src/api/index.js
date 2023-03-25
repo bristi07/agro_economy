@@ -29,7 +29,7 @@ export const fetchShipment = (id) => API.get(`${SHIPPING_BASEURL}/${id}`);
 export const updateShipment = (id, status) => API.patch(`${SHIPPING_BASEURL}/${id}`, {status});
 
 export const fetchOrders = (page) => API.get(`${ORDERS_BASEURL}?page=${page}`);
-export const fetchOrder = (id) => API.get(`${ORDERS_BASEURL}/${id}`);
+export const fetchOrder = (id) => API.get(`http://localhost:5000/orders/${id}`);
 export const updateOrder = (id, status) => API.patch(`${ORDERS_BASEURL}/${id}`, {status});
 
 export const processPayment = (token, data) => API.post(`${PAYMENTS_BASEURL}`, {token, data});

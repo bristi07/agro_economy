@@ -80,7 +80,7 @@ const ProductCard = ({product, addProductToCart, productsPage = false}) => {
                 <div className={styles['footer']}>
                     <div className={styles['details']}>
                         <p className={styles['weight']}>{product.weight}{product.measurement}</p>
-                        <p className={styles['price']}>{Number(product.price).toFixed(2)} EGP</p>
+                        <p className={styles['price']}>₹ {Number(product.price).toFixed(2)}  </p>
                     </div>
                     {product.stock ?
                         <div onClick={handleAddToCart} className={styles['add-to-cart']}>Add to Cart</div> :

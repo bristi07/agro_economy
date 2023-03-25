@@ -23,9 +23,9 @@ const CartItem = ({product, updateQuantity, edit = true, id = false}) => {
                 </div>
             </div>
             <div className={styles['price']}>
-                <div className={styles['total-price']}>{(parseFloat(product.price) * parseFloat(product.quantity || '1')).toFixed(2)} EGP</div>
+                <div className={styles['total-price']}>₹ {(parseFloat(product.price) * parseFloat(product.quantity || '1')).toFixed(2)}  </div>
                 {parseInt(product.quantity) > 1 && <div
-                    className={styles['unit-price']}>{product.price} EGP/{product.weight}{product.measurement}</div>}
+                    className={styles['unit-price']}>₹ {product.price}  /{product.weight}{product.measurement}</div>}
             </div>
         </div>
     );

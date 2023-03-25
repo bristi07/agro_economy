@@ -19,7 +19,7 @@ export const createCheckoutSession = async (req, res) => {
             line_items: products.map((product) => {
                 return {
                     price_data: {
-                        currency: "egp",
+                        currency: "₹ ",
                         product_data: {
                             name: product.name,
                         },
