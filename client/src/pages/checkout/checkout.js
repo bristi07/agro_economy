@@ -73,7 +73,7 @@ const Checkout = () => {
             email: email.current.value,
             phone_number: phone.current.value,
             address: {
-                country: 'Egypt',
+                country: 'India',
                 city: city.current.value,
                 area: area.current.value,
                 street: street.current.value,
@@ -90,7 +90,8 @@ const Checkout = () => {
         return String(phone)
             .toLowerCase()
             .match(
-                /^91[0-9]{10}$/
+                 /^91[0-9]{10}$/
+                
             );
     };
 
